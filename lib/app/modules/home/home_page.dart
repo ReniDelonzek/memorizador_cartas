@@ -59,22 +59,23 @@ class _HomePageState extends State<HomePage> {
                       ),
                       FlatButton(
                           onPressed: () async {
-                            String msg = await _controller.verificarDados();
-                            if (msg == null) {
-                              bool sucesso =
-                                  await _controller.cadastrarEquipe();
-                              if (sucesso) {
-                                Get.to(MemorizadorModule());
-                              } else {
-                                showSnack(
-                                    'Ops, houve uma falha ao cadastrar a equipe');
-                              }
-                            } else if (msg.isNotEmpty) {
-                              showSnack(
-                                msg,
-                                duration: Duration(seconds: 5),
-                              );
-                            }
+                            Get.to(MemorizadorModule());
+                            // String msg = await _controller.verificarDados();
+                            // if (msg == null) {
+                            //   bool sucesso =
+                            //       await _controller.cadastrarEquipe();
+                            //   if (sucesso) {
+                            //     Get.to(MemorizadorModule());
+                            //   } else {
+                            //     showSnack(
+                            //         'Ops, houve uma falha ao cadastrar a equipe');
+                            //   }
+                            // } else if (msg.isNotEmpty) {
+                            //   showSnack(
+                            //     msg,
+                            //     duration: Duration(seconds: 5),
+                            //   );
+                            // }
                           },
                           child: Text('Jogar!'))
                     ],

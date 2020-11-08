@@ -25,4 +25,22 @@ mixin _$MemorizadorController on _MemorizadorControllerBase, Store {
       _$cartasAtom.reportChanged();
     }, _$cartasAtom, name: '${_$cartasAtom.name}_set');
   }
+
+  final _$tempoRestanteAtom =
+      Atom(name: '_MemorizadorControllerBase.tempoRestante');
+
+  @override
+  int get tempoRestante {
+    _$tempoRestanteAtom.context.enforceReadPolicy(_$tempoRestanteAtom);
+    _$tempoRestanteAtom.reportObserved();
+    return super.tempoRestante;
+  }
+
+  @override
+  set tempoRestante(int value) {
+    _$tempoRestanteAtom.context.conditionallyRunInAction(() {
+      super.tempoRestante = value;
+      _$tempoRestanteAtom.reportChanged();
+    }, _$tempoRestanteAtom, name: '${_$tempoRestanteAtom.name}_set');
+  }
 }

@@ -6,8 +6,7 @@ import 'package:memorizador_cartas/app/widgets/seletor_carta/seletor_carta_contr
 
 class SeletorCartaWidget extends StatelessWidget {
   final SeletorCartaController controller;
-  final Carta respostaCorreta;
-  const SeletorCartaWidget(this.controller, this.respostaCorreta);
+  const SeletorCartaWidget(this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class SeletorCartaWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                   side: controller.exibirResposta
-                      ? (controller.respostaCorreta(respostaCorreta)
+                      ? (controller.respostaCorreta()
                           ? BorderSide(color: Colors.green, width: 2.0)
                           : BorderSide(color: Colors.red, width: 2.0))
                       : BorderSide.none),
@@ -62,12 +61,11 @@ class SeletorCartaWidget extends StatelessWidget {
                 ),
               ),
             ),
-            controller.exibirResposta &&
-                    !controller.respostaCorreta(respostaCorreta)
+            controller.exibirResposta && !controller.respostaCorreta()
                 ? Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16),
                     child: Text(
-                        'Resposta Correta: ${Utils.getStringTipoCarta(respostaCorreta.tipo)} de ${Utils.getStringNaipe(respostaCorreta.naipe)}',
+                        'Resposta Correta: ${Utils.getStringTipoCarta(controller.resposta.tipo)} de ${Utils.getStringNaipe(controller.resposta.naipe)}',
                         style: TextStyle(color: Colors.white)),
                   )
                 : SizedBox()

@@ -13,8 +13,11 @@ abstract class _SeletorCartaControllerBase with Store {
   Naipe naipe;
   @observable
   bool exibirResposta = false;
+  Carta resposta;
 
-  bool respostaCorreta(Carta resposta) {
+  _SeletorCartaControllerBase(this.resposta);
+
+  bool respostaCorreta() {
     return tipoSelecionado == resposta.tipo && naipe == resposta.naipe;
   }
 }

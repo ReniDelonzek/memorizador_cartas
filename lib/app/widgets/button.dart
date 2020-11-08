@@ -11,14 +11,18 @@ class Button extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(30.0)),
-        color: Colors.green,
-        onPressed: onTap,
-        child: Text(
-          title,
-          style: TextStyle(color: Colors.white),
-        ));
+    return ButtonTheme(
+      minWidth: 150,
+      height: 50,
+      child: RaisedButton(
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
+          color: Colors.green,
+          onPressed: onTap,
+          child: Text(
+            title,
+            style: TextStyle(color: Colors.white),
+          )),
+    );
   }
 }

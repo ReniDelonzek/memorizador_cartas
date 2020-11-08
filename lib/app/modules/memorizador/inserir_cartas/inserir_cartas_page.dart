@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:memorizador_cartas/app/modules/memorizador/inserir_cartas/inserir_cartas_module.dart';
 import 'package:memorizador_cartas/app/modules/memorizador/memorizador_module.dart';
 import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_module.dart';
+import 'package:memorizador_cartas/app/utils/utils.dart';
 import 'package:memorizador_cartas/app/widgets/button.dart';
 import 'package:memorizador_cartas/app/widgets/fundo/fundo_widget.dart';
 import 'package:memorizador_cartas/app/widgets/seletor_carta/seletor_carta_controller.dart';
@@ -40,12 +41,26 @@ class _InserirCartasPageState extends State<InserirCartasPage> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Button('Jogar novamente', () {
-                              Get.off(MemorizadorModule());
+                            Button('Jogar novamente', () async {
+                              bool sucesso =
+                                  await _controller.salvarResultado();
+                              if (sucesso) {
+                                Get.off(MemorizadorModule());
+                              } else {
+                                showSnack(
+                                    'Ops, houve uma falha ao salvar o resultado');
+                              }
                             }),
                             SizedBox(width: 50),
-                            Button('Ver Ranking', () {
-                              Get.to(VerRankingModule());
+                            Button('Ver Ranking', () async {
+                              bool sucesso =
+                                  await _controller.salvarResultado();
+                              if (sucesso) {
+                                Get.off(VerRankingModule());
+                              } else {
+                                showSnack(
+                                    'Ops, houve uma falha ao salvar o resultado');
+                              }
                             })
                           ],
                         )
@@ -74,19 +89,18 @@ class _InserirCartasPageState extends State<InserirCartasPage> {
 
   List<Widget> _getCartasSelecao() {
     List<Widget> widgets = List();
-    _controller.controllers.clear();
-    for (int i = 0; i < _controller.cartas.length; i++) {
-      SeletorCartaController ctlSeletor = SeletorCartaController();
+    for (int i = 0; i < _controller.controllers.length; i++) {
+      SeletorCartaController seletorCartaController =
+          _controller.controllers[i];
       widgets.add(Column(
         children: [
           Text(
             '${i + 1}ª Carta',
             style: TextStyle(color: Colors.white),
           ),
-          SeletorCartaWidget(ctlSeletor, _controller.cartas[i])
+          SeletorCartaWidget(seletorCartaController)
         ],
       ));
-      _controller.controllers.add(ctlSeletor);
     }
     return widgets;
   }

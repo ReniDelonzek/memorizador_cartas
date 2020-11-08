@@ -14,6 +14,10 @@ abstract class _MemorizadorControllerBase with Store {
   ObservableList<Carta> cartas = ObservableList();
   final SelecionarOpcaoController ctlQuantidade = SelecionarOpcaoController();
   final SelecionarOpcaoController ctlTempo = SelecionarOpcaoController();
+  @observable
+
+  /// Indica o tempo restante que o jogador tem para memorizar a carta
+  int tempoRestante = 0;
 
   _MemorizadorControllerBase() {
     ctlQuantidade.addItem('5', 1);
@@ -27,9 +31,9 @@ abstract class _MemorizadorControllerBase with Store {
 
   String verificarDados() {
     if (!ctlQuantidade.options.any((element) => element.isSelected)) {
-      return 'Você precisa a quantidade';
+      return 'Você precisa a quantidade de cartas';
     } else if (!ctlTempo.options.any((element) => element.isSelected)) {
-      return 'Você precisa o tempo';
+      return 'Você precisa o tempo para memorizar';
     }
     return null;
   }
@@ -44,5 +48,18 @@ abstract class _MemorizadorControllerBase with Store {
     this.cartas.clear();
     this.cartas.addAll(cartas);
     return cartas;
+  }
+
+  int getTempoEmSegundos() {
+    switch (ctlTempo.options.firstWhere((element) => element.isSelected)?.id) {
+      case 1:
+        return 35;
+      case 2:
+        return 60;
+      case 3:
+        return 120;
+      default:
+        return 0;
+    }
   }
 }

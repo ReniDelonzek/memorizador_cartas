@@ -31,7 +31,7 @@ class Ranking {
     if (map == null) return null;
 
     return Ranking(
-      pontuacao: map['jogadas_aggregate']['aggregate']['sum']['pontuacao'],
+      pontuacao: map['jogadas_aggregate']['aggregate']['sum']['pontuacao'] ?? 0,
       equipe: Equipe(nome: map['nome']),
     );
   }
