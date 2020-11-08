@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:memorizador_cartas/app/data/models/carta.dart';
 
 class Utils {
@@ -137,4 +139,11 @@ class Utils {
         return '';
     }
   }
+}
+
+showSnack(String mensagem, {Duration duration}) {
+  Get.showSnackbar(GetBar(
+    messageText: Text(mensagem, style: TextStyle(color: Colors.white)),
+    duration: duration ?? Duration(seconds: 2),
+  ));
 }

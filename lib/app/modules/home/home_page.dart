@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:memorizador_cartas/app/modules/home/home_module.dart';
 import 'package:memorizador_cartas/app/modules/memorizador/memorizador_module.dart';
 import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_module.dart';
+import 'package:memorizador_cartas/app/utils/utils.dart';
 import 'package:memorizador_cartas/app/widgets/fundo/fundo_widget.dart';
 
 import 'home_controller.dart';
@@ -38,9 +40,15 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         constraints: BoxConstraints(maxWidth: 300),
                         child: TextFormField(
+                          textCapitalization: TextCapitalization.characters,
+                          controller: _controller.ctlNome,
                           decoration:
                               InputDecoration(labelText: 'Nome da sua equipe'),
                           maxLength: 6,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[A-Z]|[0-9]')),
+                          ],
                           validator: (text) {
                             if (text.isEmpty) {
                               return 'Insira um nome pra sua equipe';
@@ -53,8 +61,20 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () async {
                             String msg = await _controller.verificarDados();
                             if (msg == null) {
-                              Get.to(MemorizadorModule());
-                            } else if (msg.isNotEmpty) {}
+                              bool sucesso =
+                                  await _controller.cadastrarEquipe();
+                              if (sucesso) {
+                                Get.to(MemorizadorModule());
+                              } else {
+                                showSnack(
+                                    'Ops, houve uma falha ao cadastrar a equipe');
+                              }
+                            } else if (msg.isNotEmpty) {
+                              showSnack(
+                                msg,
+                                duration: Duration(seconds: 5),
+                              );
+                            }
                           },
                           child: Text('Jogar!'))
                     ],
