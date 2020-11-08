@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memorizador_cartas/app/data/models/carta.dart';
+import 'package:memorizador_cartas/app/utils/utils.dart';
 import 'package:memorizador_cartas/app/widgets/carta/carta_controller.dart';
 
 class CartaWidget extends StatelessWidget {
@@ -20,15 +21,14 @@ class CartaWidget extends StatelessWidget {
           children: [
             Container(
                 alignment: Alignment.centerLeft,
-                child: Text(_controller.getTextTipoCarta(carta.tipo),
+                child: Text(Utils.getLetraTipoCarta(carta.tipo),
                     style: TextStyle(fontSize: 22))),
             Center(
                 child: Container(
-                    height: 120,
-                    child: _controller.getImageNaipe(carta.naipe))),
+                    height: 120, child: Utils.getImageNaipe(carta.naipe))),
             Align(
                 alignment: Alignment.bottomRight,
-                child: Text(_controller.getTextTipoCarta(carta.tipo),
+                child: Text(Utils.getLetraTipoCarta(carta.tipo),
                     style: TextStyle(fontSize: 22))),
           ],
         ),

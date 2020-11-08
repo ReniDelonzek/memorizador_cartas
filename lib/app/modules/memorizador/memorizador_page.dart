@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:memorizador_cartas/app/modules/memorizador/inserir_cartas/inserir_cartas_module.dart';
 import 'package:memorizador_cartas/app/modules/memorizador/memorizador_module.dart';
+import 'package:memorizador_cartas/app/widgets/button.dart';
 import 'package:memorizador_cartas/app/widgets/carta/carta_widget.dart';
 import 'package:memorizador_cartas/app/widgets/fundo/fundo_widget.dart';
 import 'package:memorizador_cartas/app/widgets/selecionar_opcao/selecionar_opcao_widget.dart';
@@ -26,32 +29,31 @@ class _MemorizadorPageState extends State<MemorizadorPage> {
       body: Builder(
           builder: (context) => SingleChildScrollView(
                 child: FundoWidget(Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    SizedBox(
+                      height: 50,
+                    ),
                     SelecionarOpcaoWidget(_controller.ctlQuantidade,
                         selecaoSimples: true),
                     SelecionarOpcaoWidget(_controller.ctlTempo,
                         selecaoSimples: true),
-                    RaisedButton(
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0)),
-                        onPressed: () {
-                          _controller.sortear(5);
-                          setState(() {});
-                        },
-                        child: Text('Jogar')),
-                    StaggeredGridView.extentBuilder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 15,
-                        staggeredTileBuilder: (int index) =>
-                            StaggeredTile.fit(1),
-                        maxCrossAxisExtent: 160,
-                        itemCount: _controller.cartas.length,
-                        itemBuilder: (_, index) =>
-                            CartaWidget(_controller.cartas[index])),
+                    Button(
+                      'Jogar',
+                      () {
+                        _controller.sortear(5);
+                        setState(() {});
+                        Future.delayed(Duration(seconds: 2)).then((value) =>
+                            Get.to(InserirCartasModule(_controller.cartas)));
+                      },
+                    ),
+                    Wrap(
+                      children: _controller.cartas
+                          .map((element) => CartaWidget(element))
+                          .toList(),
+                      direction: Axis.horizontal,
+                    )
                   ],
                 )),
               )),

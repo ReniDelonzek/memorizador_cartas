@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:memorizador_cartas/app/modules/home/home_module.dart';
 import 'package:memorizador_cartas/app/modules/memorizador/memorizador_module.dart';
+import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_module.dart';
 import 'package:memorizador_cartas/app/widgets/fundo/fundo_widget.dart';
 
 import 'home_controller.dart';

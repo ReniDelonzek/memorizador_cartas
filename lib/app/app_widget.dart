@@ -8,8 +8,8 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       title: 'Memorizador de Cartas',
       themeMode: ThemeMode.dark,
-      theme: Tema.getTema(context),
-      darkTheme: Tema.getTema(context, darkMode: true),
+      theme: Tema.getTema(context, darkMode: true),
+      debugShowCheckedModeBanner: false,
       home: HomeModule(),
     );
   }
