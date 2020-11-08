@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:memorizador_cartas/app/data/models/carta.dart';
 import 'package:memorizador_cartas/app/utils/utils.dart';
-import 'package:memorizador_cartas/app/widgets/carta/carta_controller.dart';
 
 class CartaWidget extends StatelessWidget {
-  final CartaController _controller = CartaController();
   final Carta carta;
   CartaWidget(this.carta);
   @override

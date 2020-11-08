@@ -1,10 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bloc_pattern/bloc_pattern_test.dart';
 import 'package:memorizador_cartas/app/data/models/carta.dart';
 import 'package:memorizador_cartas/app/data/models/db/jogada.dart';
-
 import 'package:memorizador_cartas/app/modules/memorizador/inserir_cartas/inserir_cartas_controller.dart';
-import 'package:memorizador_cartas/app/modules/memorizador/inserir_cartas/inserir_cartas_module.dart';
 import 'package:mobx/mobx.dart';
 
 void main() {

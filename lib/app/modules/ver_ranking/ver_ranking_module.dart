@@ -1,7 +1,6 @@
-import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_controller.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_controller.dart';
 import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_page.dart';
 
 class VerRankingModule extends ModuleWidget {
