@@ -106,7 +106,7 @@ class _InserirCartasPageState extends State<InserirCartasPage> {
         children: [
           Text(
             '${i + 1}ª Carta',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           SeletorCartaWidget(seletorCartaController)
         ],
