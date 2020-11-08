@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:memorizador_cartas/app/data/models/carta.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class Utils {
   /// Retorna a String contendo a LETRA de acordo com o [tipo] especificado
@@ -146,4 +147,13 @@ showSnack(String mensagem, {Duration duration}) {
     messageText: Text(mensagem, style: TextStyle(color: Colors.white)),
     duration: duration ?? Duration(seconds: 2),
   ));
+}
+
+Future<ProgressDialog> showProgressDialog(BuildContext context, String mensagem,
+    {bool isDismissible}) async {
+  ProgressDialog progressDialog =
+      ProgressDialog(context, isDismissible: isDismissible);
+  progressDialog.style(message: mensagem);
+  await progressDialog.show();
+  return progressDialog;
 }

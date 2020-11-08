@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:memorizador_cartas/app/data/models/db/equipe.dart';
 import 'package:memorizador_cartas/app/modules/home/home_module.dart';
 import 'package:memorizador_cartas/app/modules/memorizador/memorizador_module.dart';
 import 'package:memorizador_cartas/app/modules/ver_ranking/ver_ranking_module.dart';
 import 'package:memorizador_cartas/app/utils/utils.dart';
 import 'package:memorizador_cartas/app/widgets/fundo/fundo_widget.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 import 'home_controller.dart';
 
@@ -57,27 +59,41 @@ class _HomePageState extends State<HomePage> {
                           },
                         ),
                       ),
-                      FlatButton(
-                          onPressed: () async {
-                            Get.to(MemorizadorModule());
-                            // String msg = await _controller.verificarDados();
-                            // if (msg == null) {
-                            //   bool sucesso =
-                            //       await _controller.cadastrarEquipe();
-                            //   if (sucesso) {
-                            //     Get.to(MemorizadorModule());
-                            //   } else {
-                            //     showSnack(
-                            //         'Ops, houve uma falha ao cadastrar a equipe');
-                            //   }
-                            // } else if (msg.isNotEmpty) {
-                            //   showSnack(
-                            //     msg,
-                            //     duration: Duration(seconds: 5),
-                            //   );
-                            // }
-                          },
-                          child: Text('Jogar!'))
+                      Row(mainAxisSize: MainAxisSize.min, children: [
+                        FlatButton(
+                            child: Text('Ranking'),
+                            onPressed: () async {
+                              Get.to(VerRankingModule());
+                            }),
+                        SizedBox(width: 16),
+                        FlatButton(
+                            onPressed: () async {
+                              String msg = await _controller.verificarDados();
+
+                              if (msg == null) {
+                                ProgressDialog progressDialog =
+                                    await showProgressDialog(
+                                        context, 'Cadastrando Equipe');
+                                int id = await _controller.cadastrarEquipe();
+                                await progressDialog.hide();
+                                if (id != -1) {
+                                  Get.to(MemorizadorModule(Equipe(
+                                      id: id,
+                                      nome: _controller.ctlNome.text
+                                          .toUpperCase())));
+                                } else {
+                                  showSnack(
+                                      'Ops, houve uma falha ao cadastrar a equipe');
+                                }
+                              } else if (msg.isNotEmpty) {
+                                showSnack(
+                                  msg,
+                                  duration: Duration(seconds: 5),
+                                );
+                              }
+                            },
+                            child: Text('Jogar!')),
+                      ])
                     ],
                   ),
                 ),

@@ -62,6 +62,7 @@ class _MemorizadorPageState extends State<MemorizadorPage> {
                               Get.off(InserirCartasModule(
                                   _controller.cartas,
                                   Jogada(
+                                      equipe: _controller.equipe,
                                       quantidadeCartas: int.parse(
                                           _controller.ctlQuantidade.value),
                                       tempo: tempoTotal)));

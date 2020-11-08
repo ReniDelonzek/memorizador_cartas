@@ -9,6 +9,7 @@ import 'package:memorizador_cartas/app/widgets/button.dart';
 import 'package:memorizador_cartas/app/widgets/fundo/fundo_widget.dart';
 import 'package:memorizador_cartas/app/widgets/seletor_carta/seletor_carta_controller.dart';
 import 'package:memorizador_cartas/app/widgets/seletor_carta/seletor_carta_widget.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'inserir_cartas_controller.dart';
 
 class InserirCartasPage extends StatefulWidget {
@@ -42,10 +43,15 @@ class _InserirCartasPageState extends State<InserirCartasPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Button('Jogar novamente', () async {
+                              ProgressDialog progressDialog =
+                                  await showProgressDialog(
+                                      context, 'Cadastrando Jogada');
                               bool sucesso =
                                   await _controller.salvarResultado();
+                              await progressDialog.hide();
                               if (sucesso) {
-                                Get.off(MemorizadorModule());
+                                Get.off(MemorizadorModule(
+                                    _controller.jogada.equipe));
                               } else {
                                 showSnack(
                                     'Ops, houve uma falha ao salvar o resultado');
@@ -53,8 +59,12 @@ class _InserirCartasPageState extends State<InserirCartasPage> {
                             }),
                             SizedBox(width: 50),
                             Button('Ver Ranking', () async {
+                              ProgressDialog progressDialog =
+                                  await showProgressDialog(
+                                      context, 'Cadastrando Jogada');
                               bool sucesso =
                                   await _controller.salvarResultado();
+                              progressDialog.hide();
                               if (sucesso) {
                                 Get.off(VerRankingModule());
                               } else {

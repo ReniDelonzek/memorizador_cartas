@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:memorizador_cartas/app/data/models/carta.dart';
+import 'package:memorizador_cartas/app/data/models/db/equipe.dart';
 import 'package:memorizador_cartas/app/widgets/selecionar_opcao/selecionar_opcao_controller.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,6 +11,7 @@ class MemorizadorController = _MemorizadorControllerBase
     with _$MemorizadorController;
 
 abstract class _MemorizadorControllerBase with Store {
+  final Equipe equipe;
   @observable
   ObservableList<Carta> cartas = ObservableList();
   final SelecionarOpcaoController ctlQuantidade = SelecionarOpcaoController();
@@ -19,7 +21,7 @@ abstract class _MemorizadorControllerBase with Store {
   /// Indica o tempo restante que o jogador tem para memorizar a carta
   int tempoRestante = 0;
 
-  _MemorizadorControllerBase() {
+  _MemorizadorControllerBase(this.equipe) {
     ctlQuantidade.addItem('5', 1);
     ctlQuantidade.addItem('10', 2);
     ctlQuantidade.addItem('15', 3);

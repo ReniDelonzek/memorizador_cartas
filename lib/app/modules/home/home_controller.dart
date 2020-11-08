@@ -22,6 +22,8 @@ abstract class _HomeControllerBase with Store {
           return 'Ops, parece que já existe uma equipe com esse nome, por favor, escolha outro';
         }
       }
+    } else {
+      return '';
     }
     return null;
   }
@@ -37,14 +39,14 @@ abstract class _HomeControllerBase with Store {
       return null;
   }
 
-  Future<bool> cadastrarEquipe() async {
+  Future<int> cadastrarEquipe() async {
     try {
       var res = await ClientAPI.hasuraConnect.mutation(Mutations.cadastroEquipe,
           variables: {'nome': ctlNome.text.toUpperCase()});
-      return (sucessoMutationAffectRows(res, 'insert_equipe'));
+      return (obterIdsResposta(res, 'insert_equipe'))?.first ?? -1;
     } catch (error) {
       print(error);
     }
-    return false;
+    return -1;
   }
 }
