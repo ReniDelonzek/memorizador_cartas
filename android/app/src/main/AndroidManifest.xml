@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.memorizador_cartas">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="Memorizador De Cartas"
         android:icon="@mipmap/ic_launcher">
