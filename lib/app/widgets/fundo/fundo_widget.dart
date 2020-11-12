@@ -12,7 +12,10 @@ class FundoWidget extends StatelessWidget {
         height: size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('imagens/fundo.jpg'), fit: BoxFit.cover),
+              image: AssetImage(
+                'imagens/fundo.jpg',
+              ),
+              fit: BoxFit.cover),
         ),
         child: widget);
   }
