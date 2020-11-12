@@ -1,5 +1,5 @@
-import 'package:memorizador_cartas/app/data/api/client_api.dart';
-import 'package:memorizador_cartas/app/data/api/mutations.dart';
+import 'package:memorizador_cartas/app/api/client_api.dart';
+import 'package:memorizador_cartas/app/api/mutations.dart';
 import 'package:memorizador_cartas/app/data/models/carta.dart';
 import 'package:memorizador_cartas/app/data/models/db/jogada.dart';
 import 'package:memorizador_cartas/app/widgets/seletor_carta/seletor_carta_controller.dart';

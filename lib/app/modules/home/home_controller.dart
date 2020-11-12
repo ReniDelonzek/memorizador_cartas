@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:memorizador_cartas/app/data/api/client_api.dart';
-import 'package:memorizador_cartas/app/data/api/mutations.dart';
-import 'package:memorizador_cartas/app/data/api/querys.dart';
+import 'package:memorizador_cartas/app/api/client_api.dart';
+import 'package:memorizador_cartas/app/api/mutations.dart';
+import 'package:memorizador_cartas/app/api/querys.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_controller.g.dart';
