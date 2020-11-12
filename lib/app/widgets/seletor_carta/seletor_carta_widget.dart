@@ -67,19 +67,42 @@ class SeletorCartaWidget extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.only(left: 16.0, right: 16),
                     child: controller.respostaCorreta()
-                        ? Container(
-                            child: Icon(Icons.done, color: Colors.white),
-                            padding: EdgeInsets.all(16),
-                            decoration: new BoxDecoration(
-                                color: Colors.green,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.0)),
-                                border:
-                                    new Border.all(color: Colors.transparent)),
+                        ? Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                child: Icon(Icons.done, color: Colors.white),
+                                padding: EdgeInsets.all(16),
+                                decoration: new BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30.0)),
+                                    border: new Border.all(
+                                        color: Colors.transparent)),
+                              ),
+                              Text('Você acertou!!!',
+                                  style: TextStyle(color: Colors.white))
+                            ],
                           )
-                        : Text(
-                            'Resposta Correta: ${Utils.getStringTipoCarta(controller.resposta.tipo)} de ${Utils.getStringNaipe(controller.resposta.naipe)}',
-                            style: TextStyle(color: Colors.white)),
+                        : Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                child: Icon(Icons.close, color: Colors.white),
+                                padding: EdgeInsets.all(16),
+                                decoration: new BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30.0)),
+                                    border: new Border.all(
+                                        color: Colors.transparent)),
+                              ),
+                              Text(
+                                  'Resposta Correta: ${Utils.getStringTipoCarta(controller.resposta.tipo)} de ${Utils.getStringNaipe(controller.resposta.naipe)}',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white))
+                            ],
+                          ),
                   )
                 : SizedBox()
           ],
