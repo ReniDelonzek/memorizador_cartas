@@ -15,11 +15,9 @@ class Querys {
   """;
 
   static const equipeExiste = """
-  query equipeExiste(\$nome: String!) {
-  equipe_aggregate(where: {nome: {_eq: \$nome}}) {
-    aggregate {
-      count
-    }
+query getIdEquipe(\$nome: String) {
+  equipe(where: {nome: {_eq: \$nome}}) {
+    id
   }
 }
   """;

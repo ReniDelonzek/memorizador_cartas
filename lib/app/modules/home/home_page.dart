@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> {
                                 ProgressDialog progressDialog =
                                     await showProgressDialog(
                                         context, 'Cadastrando Equipe');
+
                                 int id = await _controller.cadastrarEquipe();
                                 await progressDialog.hide();
                                 if (id != -1) {

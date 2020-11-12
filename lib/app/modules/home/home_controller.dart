@@ -14,33 +14,32 @@ abstract class _HomeControllerBase with Store {
 
   Future<String> verificarDados() async {
     if (formKey.currentState.validate()) {
-      bool resultado = await equipeJaExiste();
-      if (resultado == null) {
-        return 'Ops, houve uma falha ao consultar nosso servidor';
-      } else {
-        if (resultado == true) {
-          return 'Ops, parece que já existe uma equipe com esse nome, por favor, escolha outro';
-        }
-      }
+      return null;
     } else {
       return '';
+    }
+  }
+
+  /// Retorna um int indicando se a equipe ja existe ou nao no banco de dados
+  Future<int> equipeJaExiste() async {
+    try {
+      var res = await ClientAPI.hasuraConnect.query(Querys.equipeExiste,
+          variables: {'nome': ctlNome.text.toUpperCase()});
+      if (validarRespostaQuery(res, 'equipe', podeSerVazia: false)) {
+        return res['data']['equipe'][0]['id'];
+      }
+    } catch (error) {
+      print(error);
     }
     return null;
   }
 
-  /// Retorna um bool indicando se a equipe ja existe ou nao no banco de dados
-  Future<bool> equipeJaExiste() async {
-    var res = await ClientAPI.hasuraConnect.query(Querys.equipeExiste,
-        variables: {'nome': ctlNome.text.toUpperCase()});
-    if (res != null) {
-      int count = res["data"]["equipe_aggregate"]["aggregate"]["count"];
-      return count > 0;
-    } else
-      return null;
-  }
-
   Future<int> cadastrarEquipe() async {
     try {
+      int id = await equipeJaExiste();
+      if (id != null) {
+        return id;
+      }
       var res = await ClientAPI.hasuraConnect.mutation(Mutations.cadastroEquipe,
           variables: {'nome': ctlNome.text.toUpperCase()});
       return (obterIdsResposta(res, 'insert_equipe'))?.first ?? -1;
