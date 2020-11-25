@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: Tema.getTema(context, darkMode: true),
       debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
       home: HomeModule(),
     );
   }
